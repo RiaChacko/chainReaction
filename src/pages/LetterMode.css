@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.letter-container {
+    background-color: #d9d4d4;
+    min-height: 100vh;
+    text-align: center;
+    padding: 2rem;
+    font-family: 'Press Start 2P', cursive;
+    color: black;
+    position: relative;
+}
+
+.title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.subtitle {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.length-options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.length-btn {
+    background: transparent;
+    border: 2px solid black;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+
+.length-btn.selected {
+    background-color: #ccc;
+}
+
+.word-input {
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    font-family: 'Press Start 2P', cursive;
+    width: 60%;
+    max-width: 300px;
+    text-align: center;
+    border: 2px solid black;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: white;
+}
+
+.submit-btn,
+.start-btn,
+.back-btn {
+    background-color: transparent;
+    color: black;
+    font-size: 1rem;
+    font-family: 'Press Start 2P', cursive;
+    border: 2px solid black;
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 1rem;
+}
+
+.submit-btn:hover,
+.start-btn:hover,
+.back-btn:hover {
+    background-color: #ccc;
+}
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.top-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.previous-words {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.word {
+    font-size: 1rem;
+}
+
+.white {
+    color: white;
+}
+
+.gray {
+    color: gray;
+}
+
+.timer {
+    font-size: 2rem;
+}
+
+.result {
+    font-size: 1rem;
+    margin-top: 2rem;
+}
+
+.error {
+    color: red;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+}
