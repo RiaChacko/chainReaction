@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 .categories-container {
-    background: linear-gradient(to bottom, #fdfdfd, #d0d0d0);
+    background: linear-gradient(to bottom, #6ec6ff, #0952b0);
     min-height: 100vh;
     text-align: center;
     padding: 2rem;
@@ -16,15 +16,36 @@
     margin-bottom: 1rem;
 }
 
-.coming-soon {
+.category-text {
     font-size: 1rem;
     margin-bottom: 1rem;
 }
 
-.description {
-    font-size: 0.8rem;
-    max-width: 500px;
-    margin: 0 auto;
+.timer {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.current-word {
+    margin-top: 2rem;
+}
+
+.word-input {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    width: 200px;
+}
+
+.submit-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+.error {
+    color: red;
+    font-size: 1rem;
 }
 
 .back-btn {
@@ -44,4 +65,15 @@
 
 .back-btn:hover {
     background-color: #ccc;
+}
+
+.start-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
