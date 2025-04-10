@@ -1,8 +1,8 @@
 <?php
 
-define("DB_SERVER", "128.227.205.239");
-define("DB_USER", "jakerubin");
-define("DB_PASS", "YvTbZ9tepgLyWJd");
-define("DB_NAME", "ufdb");
+define("DB_SERVER", "mysql.cise.ufl.edu");
+define("DB_USER", "menghuahuang");
+define("DB_PASS", "xb3iD6Wi8RPDhFb");
+define("DB_NAME", "chainreaction");
 
 ?>
