@@ -6,7 +6,7 @@ import LoginPage from './pages/LoginPage'
 
 const App = () => {
   return (
-      <Router>
+      <Router basename="/~menghuahuang/chain_reaction">
         <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/home" element={<HomePage />} />
