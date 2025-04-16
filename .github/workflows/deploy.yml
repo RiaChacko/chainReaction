@@ -41,4 +41,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "backend/*"
-          target: ~/public_html/chain_reaction/backend
+          target: ${{ secrets.SSH_DEST_DIR }}
