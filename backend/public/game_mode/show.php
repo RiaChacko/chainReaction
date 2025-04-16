@@ -1,26 +1,14 @@
 #!/usr/local/bin/php
-<?php require_once('../../private/initialize.php'); ?>
 
 <?php
-$id = $_GET['id'] ?? '1';
-$mode = find_game_mode_by_id($id);
+// backend/public/gamemode/show.php?id=1
+// GET one game mode by ID
+require_once('../../private/initialize.php');
+
+if(is_get_request() && isset($_GET['id'])) {
+  $mode = find_game_mode_by_id($_GET['id']);
+  echo $mode ? json_encode($mode) : json_encode(['error' => 'Game mode not found']);
+} else {
+  echo json_encode(['error' => 'GET request with id required']);
+}
 ?>
-
-<?php $page_title = 'Show Game Mode'; ?>
-<?php include(SHARED_PATH . '/staff_header.php'); ?>
-
-<div id="content">
-
-  <a class="back-link" href="<?php echo url_for('/staff/gamemodes/index.php'); ?>">&laquo; Back to List</a>
-
-  <div class="gamemode show">
-    <?php if($mode): ?>
-      <p>Game Mode ID: <?php echo h($mode['game_mode_id']); ?></p>
-      <p>Mode Name: <?php echo h($mode['mode_name']); ?></p>
-      <p>Time Limit: <?php echo h($mode['time_limit']); ?> seconds</p>
-    <?php else: ?>
-      <p>Game mode not found.</p>
-    <?php endif; ?>
-  </div>
-
-</div>
