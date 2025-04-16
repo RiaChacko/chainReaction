@@ -1,3 +1,4 @@
+#!/usr/local/bin/php
 <?php require_once('../../private/initialize.php'); ?>
 
 <?php
