@@ -32,11 +32,14 @@ const LoginPage = () => {
           const fetchGm = async () => {
             try {
               const response = await fetch(`./backend/public/game_mode/show.php?id=1`);
-              const t = await response.text()
-              console.log(t)
-              const data = await response.json();
-              console.log(data)
-              if (!response.ok) throw new Error(data.error || 'Failed to fetch game mode');
+      
+              if (!response.ok) {
+                const errorText = await response.text(); // read once if it's a plain error
+                throw new Error(errorText || 'Failed to fetch game mode');
+              }
+      
+              const data = await response.json(); // read once only
+              console.log(data);
               setGm(data);
             } catch (error) {
               console.error('Error: ', error);
@@ -48,6 +51,7 @@ const LoginPage = () => {
       
         return <h2>{gm ? JSON.stringify(gm) : 'Loading...'}</h2>;
       };
+      
 
     return (
         <div className="login-container">
