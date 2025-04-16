@@ -32,6 +32,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "build"
           target: ~/public_html/cr
+          strip_components: 1
 
       - name: Deploy PHP Backend to Server
         uses: appleboy/scp-action@v0.1.7

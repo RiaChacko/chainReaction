@@ -6,7 +6,7 @@ import LoginPage from './pages/LoginPage'
 
 const App = () => {
   return (
-      <Router basename="/~menghuahuang/cr/build">
+      <Router basename="/~menghuahuang/cr">
         <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/home" element={<HomePage />} />
