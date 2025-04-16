@@ -1,3 +1,5 @@
+#!/usr/local/bin/php
+
 <?php
 // backend/public/player/delete.php
 // POST delete player

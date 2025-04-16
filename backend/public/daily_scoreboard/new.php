@@ -1,3 +1,5 @@
+#!/usr/local/bin/php
+
 <?php
 // backend/public/dailyscoreboard/new.php
 // POST create new entry

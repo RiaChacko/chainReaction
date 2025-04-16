@@ -1,3 +1,5 @@
+#!/usr/local/bin/php
+
 <?php
 // backend/public/game/index.php
 // GET all games

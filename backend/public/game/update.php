@@ -1,3 +1,5 @@
+#!/usr/local/bin/php
+
 <?php
 // backend/public/game/update.php
 // POST update game

@@ -1,3 +1,5 @@
+#!/usr/local/bin/php
+
 <?php
 // backend/public/game/show.php?id=1
 // GET one game by ID

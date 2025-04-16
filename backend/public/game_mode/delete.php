@@ -1,3 +1,5 @@
+#!/usr/local/bin/php
+
 <?php
 // backend/public/gamemode/delete.php
 // POST delete game mode

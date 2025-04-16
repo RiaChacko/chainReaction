@@ -1,3 +1,5 @@
+#!/usr/local/bin/php
+
 <?php
 $fp = fsockopen("thunder.cise.ufl.edu", 3306, $errno, $errstr, 5);
 if (!$fp) {
