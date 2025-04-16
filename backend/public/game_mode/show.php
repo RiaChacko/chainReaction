@@ -1,4 +1,4 @@
-#!/usr/local/bin/php
+
 
 <?php
 // backend/public/gamemode/show.php?id=1
