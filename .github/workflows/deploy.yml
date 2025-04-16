@@ -42,3 +42,13 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "backend/*"
           target: ${{ secrets.SSH_DEST_DIR }}
+
+      - name: Set Permissions on Deployed Files
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ${{ secrets.SSH_DEST_DIR }}
+            chmod -R 705 *
