@@ -3,7 +3,7 @@ import './CategoriesMode.css';
 import { useNavigate } from 'react-router-dom';
 
 const loadAnimalCategory = async () => {
-    const response = await fetch('/animals_names.csv');  
+    const response = await fetch('animals_names.csv');  
     const text = await response.text();
     
     const animals = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
@@ -12,7 +12,7 @@ const loadAnimalCategory = async () => {
 };
 
 const loadCountriesCategory = async () => {
-    const response = await fetch('/countries.csv');  
+    const response = await fetch('countries.csv');  
     const text = await response.text();
     
     const countries = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
@@ -21,7 +21,7 @@ const loadCountriesCategory = async () => {
 };
 
 const loadColorCategory = async () => {
-    const response = await fetch('/color_names.csv');  
+    const response = await fetch('color_names.csv');  
     const text = await response.text();
     
     const colors = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
@@ -30,7 +30,7 @@ const loadColorCategory = async () => {
 };
 
 const loadFoodCategory = async () => {
-    const response = await fetch('/nutrition.csv'); 
+    const response = await fetch('nutrition.csv'); 
     const text = await response.text();
     
     const food = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
@@ -39,7 +39,7 @@ const loadFoodCategory = async () => {
 };
 
 const loadLanguageCategory = async () => {
-    const response = await fetch('/languages.csv');  
+    const response = await fetch('languages.csv');  
     const text = await response.text();
     
     const languages = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
