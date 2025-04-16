@@ -1,4 +1,3 @@
-#!/usr/local/bin/php
 <?php
 
 // define("DB_SERVER", "mysql.cise.ufl.edu");

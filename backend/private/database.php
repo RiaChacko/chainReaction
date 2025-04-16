@@ -1,4 +1,3 @@
-#!/usr/local/bin/php
 <?php
 
   require_once('db_credentials.php');
