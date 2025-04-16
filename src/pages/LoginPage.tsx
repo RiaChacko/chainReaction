@@ -32,7 +32,7 @@ const LoginPage = () => {
           const fetchGm = async () => {
             try {
               const response = await fetch(`./backend/public/game_mode/show.php?id=1`);
-              console.log(response)
+              console.log(response.body)
               const data = await response.json();
               console.log(data)
               if (!response.ok) throw new Error(data.error || 'Failed to fetch game mode');
