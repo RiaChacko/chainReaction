@@ -3,6 +3,7 @@
 <?php
 // backend/public/player/new.php
 // get all players
+header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
 if(is_post_request()) {

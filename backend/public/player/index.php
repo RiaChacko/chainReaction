@@ -3,6 +3,7 @@
 <?php
 // backend/public/player/show.php?id=1
 // get one player by id
+header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
 if(is_get_request()) {

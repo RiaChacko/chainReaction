@@ -2,6 +2,7 @@
 <?php
 // backend/public/dailyscoreboard/update.php
 // POST update entry
+header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
 if(is_post_request()) {

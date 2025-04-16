@@ -3,6 +3,7 @@
 <?php
 // backend/public/gamemode/delete.php
 // POST delete game mode
+header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
 if(is_post_request()) {

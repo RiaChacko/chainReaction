@@ -3,6 +3,7 @@
 <?php
 // backend/public/game/index.php
 // GET all games
+header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
 if(is_get_request()) {

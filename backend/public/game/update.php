@@ -3,6 +3,7 @@
 <?php
 // backend/public/game/update.php
 // POST update game
+header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
 if(is_post_request()) {

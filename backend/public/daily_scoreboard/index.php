@@ -2,6 +2,7 @@
 <?php
 // backend/public/dailyscoreboard/index.php
 // GET all daily scoreboard entries
+header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
 if(is_get_request()) {
