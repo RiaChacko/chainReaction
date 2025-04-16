@@ -1,20 +1,10 @@
 #!/usr/local/bin/php
 <?php
 
-// Start clean output buffer
-while (ob_get_level()) {
-  ob_end_clean();
-}
-ob_start();
-
+header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
-if (php_sapi_name() === 'cli') {
-  $id = $argv[1] ?? null;
-} else {
-  $id = $_GET['id'] ?? null;
-  header('Content-Type: application/json');
-}
+$id = $_GET['id'] ?? null;
 
 if ($id) {
   $mode = find_game_mode_by_id($id);
@@ -22,7 +12,4 @@ if ($id) {
 } else {
   echo json_encode(['error' => 'ID is required']);
 }
-
-// End and flush output
-ob_end_flush();
 ?>
