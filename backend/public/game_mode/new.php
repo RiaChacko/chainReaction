@@ -6,7 +6,7 @@
 header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
-if(is_post_request()) {
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $data = json_decode(file_get_contents("php://input"), true);
 
   $gamemode = [];

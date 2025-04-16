@@ -1,10 +1,5 @@
 <?php
 
-function is_get_request() {
-  return $_SERVER['REQUEST_METHOD'] === 'GET';
-}
-
-
 // ----- GameMode -----
 
 function find_all_game_modes() {

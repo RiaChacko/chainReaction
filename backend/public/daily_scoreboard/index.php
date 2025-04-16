@@ -5,7 +5,7 @@
 header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
-if(is_get_request()) {
+if($_SERVER['REQUEST_METHOD'] === 'GET') {
   $result = find_all_daily_scoreboards();
   $entries = [];
 

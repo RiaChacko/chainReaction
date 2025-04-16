@@ -10,7 +10,7 @@ ini_set('display_errors', 1);
 header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
-if (is_get_request()) {
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   $result = find_all_game_modes();
   $modes = [];
 
