@@ -31,10 +31,11 @@ const LoginPage = () => {
         useEffect(() => {
           const fetchGm = async () => {
             try {
-              const response = await fetch(`./backend/public/gamemode/show.php?id=1`);
+              const response = await fetch(`./backend/public/game_mode/show.php?id=1`);
               const data = await response.json();
               if (!response.ok) throw new Error(data.error || 'Failed to fetch game mode');
               setGm(data);
+              console.log(data)
             } catch (error) {
               console.error('Error: ', error);
             }
