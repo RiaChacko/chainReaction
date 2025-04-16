@@ -1,14 +1,15 @@
 #!/usr/local/bin/php
-
 <?php
-// backend/public/game/show.php?id=1
-// GET one game by ID
+
+header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
-if(is_get_request() && isset($_GET['id'])) {
-  $game = find_game_by_id($_GET['id']);
-  echo $game ? json_encode($game) : json_encode(['error' => 'Game not found']);
+$id = $_GET['id'] ?? null;
+
+if ($id) {
+  $mode = find_game_by_id($id);
+  echo json_encode($mode ?: ['error' => 'Game mode not found']);
 } else {
-  echo json_encode(['error' => 'GET request with id required']);
+  echo json_encode(['error' => 'ID is required']);
 }
 ?>
