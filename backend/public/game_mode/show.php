@@ -1,6 +1,12 @@
 #!/usr/local/bin/php
 <?php
 
+// Start clean output buffer
+while (ob_get_level()) {
+  ob_end_clean();
+}
+ob_start();
+
 require_once('../../private/initialize.php');
 
 if (php_sapi_name() === 'cli') {
@@ -16,4 +22,7 @@ if ($id) {
 } else {
   echo json_encode(['error' => 'ID is required']);
 }
+
+// End and flush output
+ob_end_flush();
 ?>
