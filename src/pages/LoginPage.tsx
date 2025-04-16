@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 
@@ -25,9 +25,31 @@ const LoginPage = () => {
         navigate('/home');
     };
 
+    const GameMode = () => {
+        const [gm, setGm] = useState(null);
+      
+        useEffect(() => {
+          const fetchGm = async () => {
+            try {
+              const response = await fetch(`cise.ufl.edu/~jakerubin/cis4930/chainReaction/backend/public/gamemode/show.php?id=1`);
+              const data = await response.json();
+              if (!response.ok) throw new Error(data.error || 'Failed to fetch game mode');
+              setGm(data);
+            } catch (error) {
+              console.error('Error: ', error);
+            }
+          };
+      
+          fetchGm();
+        }, []);
+      
+        return <h2>{gm ? JSON.stringify(gm) : 'Loading...'}</h2>;
+      };
+
     return (
         <div className="login-container">
             <h1 className="login-title">CHAIN REACTION</h1>
+            <GameMode />
             <div className="login-box">
                 <input
                     type="text"
