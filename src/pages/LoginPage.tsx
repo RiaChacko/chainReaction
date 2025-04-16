@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
-import ts from 'typescript';
+import { GameMode } from '../types'; 
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -27,7 +27,7 @@ const LoginPage = () => {
     };
 
     const GameMode = () => {
-        const [gm, setGm] = useState(null);
+        const [gm, setGm] = useState<GameMode | null>(null);
       
         useEffect(() => {
           const fetchGm = async () => {
@@ -47,7 +47,6 @@ const LoginPage = () => {
           fetchGm();
         }, []);
       
-        // @ts-ignore // TypeScript error: Property 'mode_name' does not exist on type 'null'
         return <h2>{gm ? gm.mode_name : 'Loading...'}</h2>;
       };
 
