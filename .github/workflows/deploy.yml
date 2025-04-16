@@ -33,3 +33,12 @@ jobs:
           source: "build"
           target: ${{ secrets.SSH_DEST_DIR }}
           strip_components: 1
+
+      - name: Deploy PHP Backend to Server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "backend/*"
+          target: ~/public_html/chain_reaction/backend
