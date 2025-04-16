@@ -1,16 +1,25 @@
 #!/usr/local/bin/php
-
 <?php
-// backend/public/gamemode/show.php?id=1
-// GET one game mode by ID
-header('Content-Type: application/json');
+
+echo "SAPI: " . php_sapi_name() . "\n";
+
+file_put_contents('/tmp/debug.log', 'SAPI: ' . php_sapi_name() . "\n" . 'ARGV: ' . print_r($argv, true) . "\nGET: " . print_r($_GET, true));
+
 require_once('../../private/initialize.php');
 
-
-if(is_get_request() && isset($_GET['id'])) {
-  $mode = find_game_mode_by_id($_GET['id']);
-  echo $mode ? json_encode($mode) : json_encode(['error' => 'Game mode not found']);
+if(php_sapi_name() === 'cli') {
+  // CLI mode: parse ID from $argv
+  $id = $argv[1] ?? null;
 } else {
-  echo json_encode(['error' => 'GET request with id required']);
+  // Web mode: parse ID from $_GET
+  $id = $_GET['id'] ?? null;
+  header('Content-Type: application/json');
+}
+
+if($id) {
+  $mode = find_game_mode_by_id($id);
+  echo json_encode($mode ?: ['error' => 'Game mode not found']);
+} else {
+  echo json_encode(['error' => 'ID is required']);
 }
 ?>
