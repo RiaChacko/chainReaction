@@ -1,4 +1,3 @@
-#!/usr/local/bin/php
 <?php require_once('../../private/initialize.php'); ?>
 
 <?php
@@ -15,9 +14,9 @@ $mode = find_game_mode_by_id($id);
 
   <div class="gamemode show">
     <?php if($mode): ?>
-      <p>Game Mode ID: <?php echo h($mode['id']); ?></p>
-      <p>Name: <?php echo h($mode['name']); ?></p>
-      <p>Description: <?php echo h($mode['description']); ?></p>
+      <p>Game Mode ID: <?php echo h($mode['game_mode_id']); ?></p>
+      <p>Mode Name: <?php echo h($mode['mode_name']); ?></p>
+      <p>Time Limit: <?php echo h($mode['time_limit']); ?> seconds</p>
     <?php else: ?>
       <p>Game mode not found.</p>
     <?php endif; ?>
