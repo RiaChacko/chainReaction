@@ -23,7 +23,7 @@ function insert_game_mode($gamemode) {
   
 function find_game_mode_by_id($id) {
     global $db;
-    $sql = "SELECT * FROM GameMode WHERE game_mode_id='" . $id . "'";
+    $sql = "SELECT * FROM GameMode WHERE game_mode_id='" . $id;
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return mysqli_fetch_assoc($result);

@@ -1,7 +1,7 @@
 <?php require_once('../../private/initialize.php'); ?>
 
 <?php
-$id = $_GET['id'] ?? '1';
+$id = (int)$_GET['id'] ?? 1;
 $mode = find_game_mode_by_id($id);
 ?>
 
