@@ -1,5 +1,4 @@
 #!/usr/local/bin/php
-
 <?php
 // backend/public/dailyscoreboard/show.php?id=1
 // GET one entry by ID

@@ -1,5 +1,4 @@
 #!/usr/local/bin/php
-
 <?php
 require_once('../private/initialize.php');
 $mode = find_game_mode_by_id(1); // Example ID, replace with actual ID as needed

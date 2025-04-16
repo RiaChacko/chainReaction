@@ -1,5 +1,4 @@
 #!/usr/local/bin/php
-
 <?php
 // backend/public/dailyscoreboard/index.php
 // GET all daily scoreboard entries

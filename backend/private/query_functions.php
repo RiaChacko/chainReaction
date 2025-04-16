@@ -1,5 +1,4 @@
 #!/usr/local/bin/php
-
 <?php
 
 // ----- GameMode -----

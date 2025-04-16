@@ -1,5 +1,4 @@
 #!/usr/local/bin/php
-
 <?php
 // backend/public/dailyscoreboard/delete.php
 // POST delete entry
