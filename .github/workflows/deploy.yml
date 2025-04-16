@@ -3,7 +3,7 @@ name: Deploy React App via SSH
 on:
   push:
     branches:
-      - main
+      - test_deploy
 
 jobs:
   build-and-deploy:
@@ -31,8 +31,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "build"
-          target: ${{ secrets.SSH_DEST_DIR }}
-          strip_components: 1
+          target: ~/public_html/cr
 
       - name: Deploy PHP Backend to Server
         uses: appleboy/scp-action@v0.1.7
@@ -41,7 +40,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "backend/*"
-          target: ${{ secrets.SSH_DEST_DIR }}
+          target: ~/public_html/cr
 
       - name: Set Permissions on Deployed Files
         uses: appleboy/ssh-action@v0.1.6
@@ -50,5 +49,5 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ${{ secrets.SSH_DEST_DIR }}
+            cd ~/public_html/cr
             chmod -R 705 *
