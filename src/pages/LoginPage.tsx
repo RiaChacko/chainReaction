@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
+import ts from 'typescript';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -46,7 +47,8 @@ const LoginPage = () => {
           fetchGm();
         }, []);
       
-        return <h2>{gm ? JSON.stringify(gm) : 'Loading...'}</h2>;
+        // @ts-ignore // TypeScript error: Property 'mode_name' does not exist on type 'null'
+        return <h2>{gm ? gm.mode_name : 'Loading...'}</h2>;
       };
 
     return (
