@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
-import { GameMode } from '../types'; 
+import { Game, GameMode } from '../types'; 
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -27,14 +27,13 @@ const LoginPage = () => {
     };
 
     const GameMode = () => {
-        const [gm, setGm] = useState<GameMode | null>(null);
+        const [gm, setGm] = useState<Game | null>(null);
       
         useEffect(() => {
           const fetchGm = async () => {
             try {
-              const response = await fetch(`./backend/public/game_mode/show.php?id=1`);
+              const response = await fetch(`./backend/public/game/show.php?id=1`);
               const data = await response.json();
-              console.log(data)
               if (!response.ok) throw new Error(data.error || 'Failed to fetch game mode');
               setGm(data);
             } catch (error) {
@@ -45,7 +44,7 @@ const LoginPage = () => {
           fetchGm();
         }, []);
       
-        return <h2>{gm ? gm.mode_name : 'Loading...'}</h2>;
+        return <h2>{gm ? gm.score : 'Loading...'}</h2>;
       };
 
     return (
