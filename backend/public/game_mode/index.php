@@ -1,15 +1,16 @@
 #!/usr/local/bin/php
-
 <?php
 // backend/public/gamemode/index.php
 // GET all game modes
+
+header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
-if(is_get_request()) {
+if (is_get_request()) {
   $result = find_all_game_modes();
   $modes = [];
 
-  while($mode = mysqli_fetch_assoc($result)) {
+  while ($mode = mysqli_fetch_assoc($result)) {
     $modes[] = $mode;
   }
 
