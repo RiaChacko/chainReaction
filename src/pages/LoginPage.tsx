@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 import { Game } from '../types'; 
-import { resolve } from 'path';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
