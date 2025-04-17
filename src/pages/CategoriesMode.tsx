@@ -39,7 +39,7 @@ const loadFoodCategory = async () => {
 };
 
 const loadLanguageCategory = async () => {
-    const response = await fetch('./anguages.csv');  
+    const response = await fetch('./languages.csv');  
     const text = await response.text();
     
     const languages = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
