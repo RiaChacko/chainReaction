@@ -108,6 +108,32 @@ const CategoriesMode = () => {
         loadCategories();
     }, []);
 
+    const handleGameOver = async() => {
+        try{
+            const response = await fetch(`./backend/public/game/new.php`,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify({
+                    game_mode_id :2,
+                    player_id : userId,
+                    start_time : formatToMySQLDatetime(startTime!),
+                    end_time : formatToMySQLDatetime(Date.now()),
+                    date : getCurrentDate(),
+                    score : score,
+                })
+            });
+            const data = await response.json();
+            console.log(data);                
+
+        } catch(error){
+            
+            console.log(error);
+        }
+        
+    };
+
     useEffect(() => {
         if (gameStarted && !gameOver && timer > 0) {
             const interval = setInterval(() => {
@@ -122,7 +148,7 @@ const CategoriesMode = () => {
 
             return
         }
-    }, [gameStarted, timer, gameOver]);
+    }, [gameStarted, timer, gameOver, handleGameOver]);
 
     const handleStart = () => {
         
@@ -187,31 +213,6 @@ const CategoriesMode = () => {
         navigate('/home');
     };
 
-    const handleGameOver = async() => {
-        try{
-            const response = await fetch(`./backend/public/game/new.php`,{
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json',
-                },
-                body: JSON.stringify({
-                    game_mode_id :2,
-                    player_id : userId,
-                    start_time : formatToMySQLDatetime(startTime!),
-                    end_time : formatToMySQLDatetime(Date.now()),
-                    date : getCurrentDate(),
-                    score : score,
-                })
-            });
-            const data = await response.json();
-            console.log(data);                
-
-        } catch(error){
-            
-            console.log(error);
-        }
-        
-    };
 
     if (gameOver) {
         return (

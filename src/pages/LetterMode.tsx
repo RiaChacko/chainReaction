@@ -39,9 +39,34 @@ const LetterMode = () => {
     const [totalCount, setTotalCount] = useState(0);
     const [error, setError] = useState('');
     const navigate = useNavigate();
-
+    
     const { userId } = useContext(UserContext);
+    
+    const handleGameOver = async() => {
+        try{
+            const response = await fetch(`./backend/public/game/new.php`,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify({
+                    game_mode_id :selectedLength! - 1,
+                    player_id : userId,
+                    start_time : formatToMySQLDatetime(startTime!),
+                    end_time : formatToMySQLDatetime(Date.now()),
+                    date : getCurrentDate(),
+                    score : validCount,
+                })
+            });
+            const data = await response.json();
+            console.log(data);                
 
+        } catch(error){
+            
+            console.log(error);
+        }
+        
+    };
 
     // Timer logic
     useEffect(() => {
@@ -59,7 +84,7 @@ const LetterMode = () => {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [gameStarted, timer, gameOver]);
+    }, [gameStarted, timer, gameOver, handleGameOver]);
 
     const validateWord = async (word: string): Promise<boolean> => {
         try {
@@ -115,31 +140,6 @@ const LetterMode = () => {
         navigate('/home');
     };
 
-    const handleGameOver = async() => {
-        try{
-            const response = await fetch(`./backend/public/game/new.php`,{
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json',
-                },
-                body: JSON.stringify({
-                    game_mode_id :selectedLength! - 1,
-                    player_id : userId,
-                    start_time : formatToMySQLDatetime(startTime!),
-                    end_time : formatToMySQLDatetime(Date.now()),
-                    date : getCurrentDate(),
-                    score : validCount,
-                })
-            });
-            const data = await response.json();
-            console.log(data);                
-
-        } catch(error){
-            
-            console.log(error);
-        }
-        
-    };
 
     if (gameOver) {
         return (
