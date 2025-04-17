@@ -117,6 +117,12 @@ const LetterMode = () => {
     };
 
     const handleGameOver = async() => {
+        console.log(selectedLength);
+        console.log(userId);
+        console.log(formatToMySQLDatetime(startTime!));
+        console.log(formatToMySQLDatetime(endTime!));
+        console.log(getCurrentDate());
+        console.log(validCount);
         try{
             const response = await fetch(`./backend/public/game/new.php`,{
                 method:'POST',
