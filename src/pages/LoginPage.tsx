@@ -16,7 +16,7 @@ const LoginPage = () => {
                 const response = await fetch(`/backend/public/player/show.php`, {
                     method: 'GET',
                 });
-    
+                console.log(data);
                 const data = await response.json();
                 const player = data.find((player: { username: string; }) => player.username === username);
     
