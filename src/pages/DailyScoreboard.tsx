@@ -63,14 +63,20 @@ const DailyScoreboard = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {entries.map((item, index) => (
-                    <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{item.username}</td>
-                        <td>{item.score}</td>
-                        <td>{item.date}</td>
-                    </tr>
-                    ))}
+                    {entries.length === 0 ? (
+                        <tr>
+                        <td colSpan={4}>No scores for this mode today.</td>
+                        </tr>
+                    ) : (
+                        entries.map((item, index) => (
+                        <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{item.username}</td>
+                            <td>{item.score}</td>
+                            <td>{item.date}</td>
+                        </tr>
+                        ))
+                    )}
                 </tbody>
                 </table>
             </div>
