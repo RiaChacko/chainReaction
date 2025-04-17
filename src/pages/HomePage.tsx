@@ -24,29 +24,31 @@ const HomePage = () => {
             <button onClick={() => handleScoreboardSelect()}>Scoreboard</button>
 
             <button onClick={async () => {
-                try{
-                    const response = await fetch(`./backend/public/game/new.php`,{
-                        method:'POST',
-                        headers:{
-                            'Content-Type':'application/json',
-                        },
-                        body: JSON.stringify({
-                            game_mode_id: 1,                  // existing game_mode_id
-                            player_id: 1,                     // existing player_id
-                            start_time: "2025-04-17 10:00:00", // must be valid DATETIME
-                            end_time: "2025-04-17 10:10:00",   // must be valid DATETIME
-                            date: "2025-04-17",               // must be valid DATE
-                            score: 1000
-                          })                          
-                    });
-                    const data = await response.json();
-                    console.log(data);                
-        
-                } catch(error){
-                    
-                    console.log(error);
-                }
-            }}>Scoreboard</button>
+  try {
+    for (let game_mode_id = 1; game_mode_id <= 7; game_mode_id++) {
+      const response = await fetch(`./backend/public/game/new.php`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          game_mode_id: game_mode_id,
+          player_id: 1, // Make sure this player exists
+          start_time: "2025-04-17 10:00:00",
+          end_time: "2025-04-17 10:10:00",
+          date: "2025-04-17",
+          score: 1000 + game_mode_id // to differentiate
+        })
+      });
+
+      const data = await response.json();
+      console.log(`Inserted for mode ${game_mode_id}:`, data);
+    }
+  } catch (error) {
+    console.log("Insert error:", error);
+  }
+}}
+>make games</button>
             
             <h2 className="subtitle">Choose Mode</h2>
             <div className="mode-buttons">
