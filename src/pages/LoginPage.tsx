@@ -20,7 +20,9 @@ const LoginPage = () => {
                 });
                 const data = await response.json();
                 console.log(data);
-                
+                if(response.ok){
+                    navigate('/home');
+                }
             } catch (error) {
                 console.error('Error:', error);
                 alert('An error occurred. Please try again later.');

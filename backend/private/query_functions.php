@@ -76,7 +76,7 @@ function insert_player($player) {
     return ['error' => mysqli_error($db)];
   }
 
-  return true;
+  return mysqli_insert_id($db);
 }
 
 function find_player_by_id($id) {

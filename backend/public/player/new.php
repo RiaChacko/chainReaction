@@ -21,10 +21,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $player['highest_score'] = $data['highest_score'] ?? 0;
   $player['daily_streak'] = $data['daily_streak'] ?? 0;
 
-  $result = insert_player($player);
-  if($result) {
-    echo json_encode(['message' => 'Player inserted']);
+  $id = insert_player($player);
+  if (is_array($id)) {
+    echo json_encode($id); 
+  } else {
+    echo json_encode(['id' => $id]);
   }
+
 } else {
   echo json_encode(['error' => 'POST request required']);
 }
