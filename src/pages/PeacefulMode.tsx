@@ -42,32 +42,6 @@ const PeacefulMode = () => {
         setPreviousWords([word]);
     }, []);
 
-    const handleGameOver = async() => {
-        try{
-            const response = await fetch(`./backend/public/game/new.php`,{
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json',
-                },
-                body: JSON.stringify({
-                    game_mode_id :1,
-                    player_id : userId,
-                    start_time : formatToMySQLDatetime(startTime!),
-                    end_time : formatToMySQLDatetime(Date.now()),
-                    date : getCurrentDate(),
-                    score : validCount,
-                })
-            });
-            const data = await response.json();
-            console.log(data);                
-
-        } catch(error){
-            
-            console.log(error);
-        }
-        
-    };
-
     // Timer logic (only when game starts)
     useEffect(() => {
         if (!gameStarted || gameOver) return;
@@ -83,7 +57,7 @@ const PeacefulMode = () => {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [gameStarted, timer, gameOver, handleGameOver]);
+    }, [gameStarted, timer, gameOver]);
 
     const validateWord = async (word: string): Promise<boolean> => {
         try {
@@ -127,10 +101,38 @@ const PeacefulMode = () => {
 
     const handleBack = () => {
         navigate('/home');
-    };      
+    };
+
+    const handleGameOver = async() => {
+        try{
+            const response = await fetch(`./backend/public/game/new.php`,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify({
+                    game_mode_id :1,
+                    player_id : userId,
+                    start_time : formatToMySQLDatetime(startTime!),
+                    end_time : formatToMySQLDatetime(Date.now()),
+                    date : getCurrentDate(),
+                    score : validCount,
+                })
+            });
+            const data = await response.json();
+            console.log(data);                
+
+        } catch(error){
+            
+            console.log(error);
+        }
+        
+    };
+      
 
     // Result screen
     if (gameOver) {
+        handleGameOver();
         return (
             <div className="peaceful-container">
                 <button onClick={handleBack} className="back-btn">← Back</button>
