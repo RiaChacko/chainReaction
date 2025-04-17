@@ -13,7 +13,7 @@ const LoginPage = () => {
         // Placeholder logic
         if (username && password) {
             try {
-                const response = await fetch(`/backend/public/player/show.php`, {
+                const response = await fetch(`./backend/public/player/show.php`, {
                     method: 'GET',
                 });
                 const data = await response.json();
@@ -42,7 +42,7 @@ const LoginPage = () => {
         // Placeholder logic
         if (username && password && email) {
             try{
-                const response = await fetch(`/backend/public/player/new.php`,{
+                const response = await fetch(`./backend/public/player/new.php`,{
                     method:'POST',
                     headers:{
                         'Content-Type':'application/json',
@@ -86,7 +86,7 @@ const LoginPage = () => {
         useEffect(() => {
           const fetchGm = async () => {
             try {
-              const response = await fetch(`/backend/public/game/show.php?id=1`);
+              const response = await fetch(`./backend/public/game/show.php?id=1`);
               const data = await response.json();
               console.log(data)
               if (!response.ok) throw new Error(data.error || 'Failed to fetch game mode');
