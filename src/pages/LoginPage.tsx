@@ -86,7 +86,7 @@ const LoginPage = () => {
         useEffect(() => {
           const fetchGm = async () => {
             try {
-              const response = await fetch(`/backend/public/game/show.php?id=1`);
+              const response = await fetch(`./backend/public/game/show.php?id=1`);
               const data = await response.json();
               console.log(data)
               if (!response.ok) throw new Error(data.error || 'Failed to fetch game mode');
