@@ -6,11 +6,11 @@ import { ScoreboardEntry } from '../types'; // Adjust the import path as necessa
 const GameModes = {
     1: "Peaceful",
     2: "Normal",
-    4: "4 Letter",
-    5: "5 Letter",
-    6: "6 Letter",
-    7: "7 Letter",
-    8: "8 Letter",
+    3: "4 Letter",
+    4: "5 Letter",
+    5: "6 Letter",
+    6: "7 Letter",
+    7: "8 Letter",
   };
 
 const DailyScoreboard = () => {
