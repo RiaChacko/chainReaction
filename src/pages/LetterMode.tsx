@@ -3,7 +3,6 @@ import './LetterMode.css';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
-import { valid } from 'semver';
 
 const WORD_LISTS: { [length: number]: string[] } = {
     4: ['star', 'fish', 'tree', 'gate', 'drop', 'book'],
