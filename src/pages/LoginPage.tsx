@@ -21,7 +21,7 @@ const LoginPage = () => {
         if (username && password && email) {
             console.log("here");
             try{
-                const response = await fetch('./backend/public/player/new.php',{
+                const response = await fetch('/backend/public/player/new.php',{
                     method:'POST',
                     headers:{
                         'Content-Type':'application/json',
