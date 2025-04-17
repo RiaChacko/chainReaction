@@ -11,7 +11,6 @@ const DailyScoreboard = () => {
     const loadScoreboard = async () => {
         try{
         const response = await fetch("./backend/public/daily_scoreboard/index.php");
-        console.log(response.text());
         const data = await response.json();
         
         setEntries(data);}
