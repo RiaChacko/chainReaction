@@ -130,7 +130,7 @@ const LetterMode = () => {
                     'Content-Type':'application/json',
                 },
                 body: JSON.stringify({
-                    game_mode_id :selectedLength,
+                    game_mode_id :selectedLength! - 1,
                     player_id : userId,
                     start_time : formatToMySQLDatetime(startTime!),
                     end_time : formatToMySQLDatetime(endTime!),

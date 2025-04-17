@@ -27,6 +27,7 @@ const LoginPage = () => {
                 }
                 setUsername(username);
                 setUserId(data['id']);
+                console.log(data['id']);
             } catch (error) {
                 console.error('Error:', error);
                 alert('An error occurred. Please try again later.');
