@@ -119,6 +119,9 @@ const CategoriesMode = () => {
 
         if (timer === 0) {
             setGameOver(true);
+            setEndTime(Date.now()); 
+
+            return
         }
     }, [gameStarted, timer, gameOver]);
 
