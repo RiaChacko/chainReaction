@@ -20,14 +20,7 @@ const LoginPage = () => {
                 });
                 const data = await response.json();
                 console.log(data);
-                const player = data.find((player: { username: string; }) => player.username === username);
-    
-                if (player && await verifyPassword(password, player.password)) {
-                    localStorage.setItem('playerId', player.player_id);
-                    navigate('/home');
-                } else {
-                    alert('Invalid credentials');
-                }
+                
             } catch (error) {
                 console.error('Error:', error);
                 alert('An error occurred. Please try again later.');

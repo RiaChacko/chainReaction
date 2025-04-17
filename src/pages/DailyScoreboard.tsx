@@ -15,7 +15,7 @@ const DailyScoreboard = () => {
     //const formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
     const loadScoreboard = async () => {
         try{
-        const response = await fetch("./backend/public/daily_scoreboard/index.php");
+        const response = await fetch("./backend/public/daily_scoreboard/show.php?id=#"); // change # with whatever the game_mode id is
         const data = await response.json();
         
         setEntries(data);}
