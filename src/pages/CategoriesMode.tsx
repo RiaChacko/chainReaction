@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CategoriesMode.css';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
