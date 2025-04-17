@@ -9,17 +9,39 @@ const LoginPage = () => {
     const [email, setEmail] = useState(''); 
     const navigate = useNavigate();
 
-    const handleSignIn = () => {
+    const handleSignIn = async () => {
         // Placeholder logic
         if (username && password) {
-            navigate('/home');
+            try {
+                const response = await fetch('/backend/public/player/show.php', {
+                    method: 'GET',
+                });
+    
+                const data = await response.json();
+                const player = data.find((player: { username: string; }) => player.username === username);
+    
+                if (player && await verifyPassword(password, player.password)) {
+                    localStorage.setItem('playerId', player.player_id);
+                    navigate('/home');
+                } else {
+                    alert('Invalid credentials');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            }
+        } else {
+            alert('Please enter both username and password');
         }
     };
 
+    const verifyPassword = async (inputPassword: string, storedPassword: any) => {
+     
+        return inputPassword === storedPassword;
+    };
     const handleSignUp = async () => {
         // Placeholder logic
         if (username && password && email) {
-            console.log("here");
             try{
                 const response = await fetch('/backend/public/player/new.php',{
                     method:'POST',
