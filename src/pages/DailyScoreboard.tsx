@@ -41,17 +41,15 @@ const DailyScoreboard = () => {
         <div className="letter-container">
             <button onClick={handleBack} className="back-btn">← Back</button>
             <h1 className="title">Daily Scoreboard</h1>
-            <div className="mode-buttons">
-                {Object.entries(GameModes).map(([modeId, modeName]) => (
-                    <button
+            {Object.entries(GameModes).map(([modeId, modeName]) => (
+                <button
                     key={modeId}
                     onClick={() => setGameMode(Number(modeId))}
                     style={{ fontWeight: gameMode === Number(modeId) ? 'bold' : 'normal' }}
-                    >
-                        {modeName}
-                    </button>
-                ))}
-            </div>
+                >
+                    {modeName}
+                </button>
+            ))}
 
             <div className="scoreboard">
                 <table>
