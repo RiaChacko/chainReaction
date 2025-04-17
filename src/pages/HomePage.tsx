@@ -16,7 +16,7 @@ const HomePage = () => {
     return (
         <div className="homepage-container">
             <h1 className="title">CHAIN REACTION</h1>
-            <h2 className="subtitle">Welcome, {username}</h2>
+            <h2 className="subtitle">Welcome, {username},{userId}</h2>
 
             <h2 className="subtitle">Choose Mode</h2>
             <div className="mode-buttons">
