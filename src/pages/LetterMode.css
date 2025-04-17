@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 .letter-container {
-    background-color: #d9d4d4;
+    background: linear-gradient(to bottom, #6ec6ff, #0952b0);
     min-height: 100vh;
     text-align: center;
     padding: 2rem;
@@ -43,7 +43,7 @@
 
 .word-input {
     padding: 0.7rem 1rem;
-    font-size: 1rem;
+    font-size: 0.7rem;
     font-family: 'Press Start 2P', cursive;
     width: 60%;
     max-width: 300px;

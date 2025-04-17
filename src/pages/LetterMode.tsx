@@ -96,7 +96,41 @@ const LetterMode = () => {
         navigate('/home');
     };
 
+    const handleGameOver = () => {
+        // Placeholder logic
+
+        // try{
+        //     const response = await fetch(`./backend/public/game/new.php`{
+        //         method:'POST',
+        //         headers:{
+        //             'Content-Type':'application/json',
+        //         },
+        //         body: JSON.stringify({
+        //             game_mode_id :,
+        //             player_id :,
+        //             start_time :,
+        //             end_time :,
+        //             date :,
+        //             word_count :
+        //     });
+        //     const data = await response.json();
+        //     console.log(data);                
+        //     if(response.ok){
+        //         navigate('/home');
+        //     }
+        //     else{
+        //         alert(data.error || 'Sign-up failed');
+        //     }
+        // } catch(error){
+            
+        //     console.log(error);
+        // }
+        
+
+    };
+
     if (gameOver) {
+        handleGameOver();
         return (
             <div className="letter-container">
                 <button onClick={handleBack} className="back-btn">← Back</button>
