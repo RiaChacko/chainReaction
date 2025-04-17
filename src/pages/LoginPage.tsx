@@ -58,7 +58,6 @@ const LoginPage = () => {
                     }),
                 });
                 const data = await response.json();
-                console.log(data);
                 if(response.ok){
                     navigate('/home');
                 }
@@ -88,7 +87,6 @@ const LoginPage = () => {
             try {
               const response = await fetch(`./backend/public/game/show.php?id=1`);
               const data = await response.json();
-              console.log(data)
               if (!response.ok) throw new Error(data.error || 'Failed to fetch game mode');
               setGm(data);
             } catch (error) {
