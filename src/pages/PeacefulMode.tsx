@@ -48,7 +48,6 @@ const PeacefulMode = () => {
 
         if (timer === 0) {
             setGameOver(true);
-            handleGameOver(); 
             return;
         }
 
