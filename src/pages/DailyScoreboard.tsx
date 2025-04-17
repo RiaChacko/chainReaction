@@ -21,7 +21,7 @@ const DailyScoreboard = () => {
         setEntries(data);}
                   catch(error){console.error("Error getting scoreboard", error)}
         
-        setEntries(entries.filter((entry)=>(entry.date==(formattedDate))));
+        setEntries(entries.filter((entry)=>(entry.date===(formattedDate))));
         setEntries(entries.sort((a,b)=>(a.highest_score-b.highest_score)));
                   
     }
