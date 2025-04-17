@@ -30,10 +30,6 @@ const LoginPage = () => {
         }
     };
 
-    const verifyPassword = async (inputPassword: string, storedPassword: any) => {
-     
-        return inputPassword === storedPassword;
-    };
     const handleSignUp = async () => {
         // Placeholder logic
         if (username && password && email) {
