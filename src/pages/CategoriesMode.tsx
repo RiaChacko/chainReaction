@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './CategoriesMode.css';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
 
 const loadAnimalCategory = async () => {
     const response = await fetch('./animals_names.csv');  
@@ -67,7 +69,17 @@ const getRandomWord = (category: keyof typeof CATEGORIES): string => {
     return words[Math.floor(Math.random() * words.length)];
 };
 
+const formatToMySQLDatetime = (timestamp: number) => {
+    return new Date(timestamp).toISOString().slice(0, 19).replace('T', ' ');
+};
+
+const getCurrentDate = () => {
+    return new Date().toISOString().split('T')[0];
+};
+
 const CategoriesMode = () => {
+    const [startTime, setStartTime] = useState<number | null>(null);
+    const [endTime, setEndTime] = useState<number | null>(null);
     const [selectedCategory, setSelectedCategory] = useState<keyof typeof CATEGORIES>('Color');
     const [currentWord, setCurrentWord] = useState<string>('');
     const [currentInput, setCurrentInput] = useState<string>('');
@@ -77,6 +89,8 @@ const CategoriesMode = () => {
     const [gameOver, setGameOver] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const navigate = useNavigate();
+
+    const { userId } = useContext(UserContext);
 
     useEffect(() => {
         const loadCategories = async () => {
@@ -117,6 +131,7 @@ const CategoriesMode = () => {
         const word = getRandomWord(randomCategory); 
         setCurrentWord(word);
         setGameStarted(true);
+        setStartTime(Date.now()); // current timestamp in ms
     };
 
     const validateWord = async (word: string, category: keyof typeof CATEGORIES): Promise<boolean> => {
@@ -169,6 +184,37 @@ const CategoriesMode = () => {
     const handleBack = () => {
         navigate('/home');
     };
+
+    const handleGameOver = async() => {
+        try{
+            const response = await fetch(`./backend/public/game/new.php`,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify({
+                    game_mode_id :2,
+                    player_id : userId,
+                    start_time : formatToMySQLDatetime(startTime!),
+                    end_time : formatToMySQLDatetime(endTime!),
+                    date : getCurrentDate(),
+                    score : score,
+                })
+            });
+            const data = await response.json();
+            console.log(data);                
+
+        } catch(error){
+            
+            console.log(error);
+        }
+        
+    };
+
+    useEffect(() => {
+        if (gameOver) handleGameOver();
+    }, [gameOver]);   
+
 
     if (gameOver) {
         return (

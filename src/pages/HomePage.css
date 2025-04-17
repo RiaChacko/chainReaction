@@ -41,15 +41,3 @@
 .mode-buttons button:hover {
     transform: scale(1.05);
 }
-
-.button {
-    background: linear-gradient(to bottom, #ffd54f, #c8a415);
-    color: white;
-    border: none;
-    border-radius: 15px;
-    padding: 1rem 1.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-    font-weight: bold;
-    transition: transform 0.2s;
-}

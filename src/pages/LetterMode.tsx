@@ -148,8 +148,11 @@ const LetterMode = () => {
         
     };
 
+    useEffect(() => {
+        if (gameOver) handleGameOver();
+    }, [gameOver]); 
+
     if (gameOver) {
-        handleGameOver();
         return (
             <div className="letter-container">
                 <button onClick={handleBack} className="back-btn">← Back</button>

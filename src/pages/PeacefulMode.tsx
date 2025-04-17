@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './PeacefulMode.css';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
 
 const WORD_LIST = ['eagle', 'train', 'sand', 'loop', 'river', 'moon', 'fruit', 'flame', 'dodge', 'dream'];
 
@@ -8,7 +10,17 @@ const getRandomWord = () => {
     return WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
 };
 
+const formatToMySQLDatetime = (timestamp: number) => {
+    return new Date(timestamp).toISOString().slice(0, 19).replace('T', ' ');
+};
+
+const getCurrentDate = () => {
+    return new Date().toISOString().split('T')[0];
+};
+
 const PeacefulMode = () => {
+    const [startTime, setStartTime] = useState<number | null>(null);
+    const [endTime, setEndTime] = useState<number | null>(null);
     const [timer, setTimer] = useState(20);
     const [gameStarted, setGameStarted] = useState(false);
     const [gameOver, setGameOver] = useState(false);
@@ -21,6 +33,8 @@ const PeacefulMode = () => {
     const [totalCount, setTotalCount] = useState(0);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+
+    const { userId } = useContext(UserContext);
 
     // Set the starting word only once
     useEffect(() => {
@@ -82,11 +96,42 @@ const PeacefulMode = () => {
 
     const handleStart = () => {
         setGameStarted(true);
+        setStartTime(Date.now()); // current timestamp in ms
     };
 
     const handleBack = () => {
         navigate('/home');
     };
+
+    const handleGameOver = async() => {
+        try{
+            const response = await fetch(`./backend/public/game/new.php`,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify({
+                    game_mode_id :1,
+                    player_id : userId,
+                    start_time : formatToMySQLDatetime(startTime!),
+                    end_time : formatToMySQLDatetime(endTime!),
+                    date : getCurrentDate(),
+                    score : validCount,
+                })
+            });
+            const data = await response.json();
+            console.log(data);                
+
+        } catch(error){
+            
+            console.log(error);
+        }
+        
+    };
+
+    useEffect(() => {
+        if (gameOver) handleGameOver();
+    }, [gameOver]);   
 
     // Result screen
     if (gameOver) {

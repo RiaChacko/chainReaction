@@ -81,31 +81,9 @@ const LoginPage = () => {
         navigate('/home');
     };
 
-    const GameMode = () => {
-        const [gm, setGm] = useState<Game | null>(null);
-      
-        useEffect(() => {
-          const fetchGm = async () => {
-            try {
-              const response = await fetch(`./backend/public/game/show.php?id=1`);
-              const data = await response.json();
-              if (!response.ok) throw new Error(data.error || 'Failed to fetch game mode');
-              setGm(data);
-            } catch (error) {
-              console.error('Error: ', error);
-            }
-          };
-      
-          fetchGm();
-        }, []);
-      
-        return <h2>{gm ? gm.score : 'Loading...'}</h2>;
-      };
-
     return (
         <div className="login-container">
             <h1 className="login-title">CHAIN REACTION</h1>
-            <GameMode />
             <div className="login-box">
             <input
                     type="text"
