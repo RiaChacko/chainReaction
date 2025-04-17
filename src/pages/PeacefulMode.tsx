@@ -78,6 +78,12 @@ const PeacefulMode = () => {
             return;
         }
 
+        if (previousWords.includes(newWord)){
+            setError(`Word "${newWord}" has already been used`);
+            setCurrentInput('');
+            return;
+        }
+
         const isValid = await validateWord(newWord);
 
         setTotalCount((prev) => prev + 1);

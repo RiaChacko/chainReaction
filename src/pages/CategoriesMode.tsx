@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './CategoriesMode.css';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
@@ -90,6 +90,8 @@ const CategoriesMode = () => {
     const navigate = useNavigate();
 
     const { userId } = useContext(UserContext);
+    const wordsUsed = useRef(new Set());
+
 
     useEffect(() => {
         const loadCategories = async () => {
@@ -139,6 +141,7 @@ const CategoriesMode = () => {
         const validWordsForCategory = CATEGORIES[category];
         const normalizedWord = word.trim().toLowerCase();
         console.log(`Valid words for ${category}:`, validWordsForCategory);
+
         if (!validWordsForCategory || !validWordsForCategory.map(word => word.toLowerCase()).includes(normalizedWord)) {
             setError(`"${word}" is not a valid word for ${category}`);
             return false;
@@ -166,17 +169,34 @@ const CategoriesMode = () => {
         }
     };
 
+    const checkUsed = async(word: string) : Promise<boolean> => {
+        if (wordsUsed.current.has(word)) {
+            return true;
+        } 
+
+        wordsUsed.current.add(word);
+        return false;
+
+    }
+
     const handleSubmit = async () => {
         const newWord = currentInput.trim().toLowerCase();
-        const isValid = await validateWord(newWord, selectedCategory);
-        
-        if (isValid) {
-            setScore((prev) => prev + 1);
-            setError('');
-            const nextWord = getRandomWord(selectedCategory); 
-            setCurrentWord(nextWord);
-        } else {
-            setError(`"${newWord}" is not a valid word for ${selectedCategory}`);
+        const wordUsed = await checkUsed(newWord);
+        if (wordUsed) {
+            setError(`User has already used the word "${newWord}"`);
+        }
+
+        else{
+            const isValid = await validateWord(newWord, selectedCategory);
+            
+            if (isValid) {
+                setScore((prev) => prev + 1);
+                setError('');
+                const nextWord = getRandomWord(selectedCategory); 
+                setCurrentWord(nextWord);
+            } else {
+                setError(`"${newWord}" is not a valid word for ${selectedCategory}`);
+            }
         }
 
         setCurrentInput('');
