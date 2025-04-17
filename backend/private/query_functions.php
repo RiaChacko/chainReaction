@@ -59,8 +59,8 @@ function find_all_players() {
 function insert_player($player) {
   global $db;
 
-  $sql = "INSERT INTO Player (avg_words_per_min, playtime, username, email, password, highest_score, daily_streak) VALUES ('" .
-         $player['avg_words_per_min'] . "', '" .
+  $sql = "INSERT INTO Player (average_words_per_minute, playtime, username, email, password, highest_score, daily_streak) VALUES ('" .
+         $player['average_words_per_minute'] . "', '" .
          $player['playtime'] . "', '" .
          $player['username'] . "', '" .
          $player['email'] . "', '" .
@@ -90,7 +90,7 @@ function find_player_by_id($id) {
 function update_player($player) {
     global $db;
     $sql = "UPDATE Player SET ";
-    $sql .= "avg_words_per_min='" . $player['avg_words_per_min'] . "', ";
+    $sql .= "average_words_per_minute='" . $player['average_words_per_minute'] . "', ";
     $sql .= "playtime='" . $player['playtime'] . "', ";
     $sql .= "username='" . $player['username'] . "', ";
     $sql .= "email='" . $player['email'] . "', ";

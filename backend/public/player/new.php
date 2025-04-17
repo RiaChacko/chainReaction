@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $data = json_decode(file_get_contents("php://input"), true);
 
   $player = [];
-  $player['avg_words_per_min'] = $data['avg_words_per_min'] ?? 0;
+  $player['average_words_per_minute'] = $data['average_words_per_minute'] ?? 0;
   $player['playtime'] = $data['playtime'] ?? 0;
   $player['username'] = $data['username'] ?? '';
   $player['email'] = $data['email'] ?? '';
