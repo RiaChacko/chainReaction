@@ -52,3 +52,4 @@ jobs:
           script: |
             cd ${{ secrets.SSH_DEST_DIR }}
             chmod -R 705 *
+            dos2unix *.php
