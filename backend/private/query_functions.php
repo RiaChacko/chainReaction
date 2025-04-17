@@ -110,6 +110,14 @@ function delete_player($id) {
     return $result ? true : die(mysqli_error($db));
 }
 
+function player_signin($email, $username, $password) {
+  global $db;
+  $sql = "SELECT * FROM Player WHERE email='" . $email . "' AND username='" . $username . "' AND password='" . $password . "'";
+  $result = mysqli_query($db, $sql);
+  confirm_result_set($result);
+  return mysqli_fetch_assoc($result);    
+}
+
 // ----- Game -----
 
 function insert_game($game) {
