@@ -13,7 +13,7 @@ const LoginPage = () => {
         // Placeholder logic
         if (username && password) {
             try {
-                const response = await fetch('/backend/public/player/show.php', {
+                const response = await fetch(`/backend/public/player/show.php`, {
                     method: 'GET',
                 });
     
@@ -43,7 +43,7 @@ const LoginPage = () => {
         // Placeholder logic
         if (username && password && email) {
             try{
-                const response = await fetch('/backend/public/player/new.php',{
+                const response = await fetch(`/backend/public/player/new.php`,{
                     method:'POST',
                     headers:{
                         'Content-Type':'application/json',
