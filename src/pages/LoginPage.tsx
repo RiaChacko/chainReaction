@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
-import { Game } from '../types'; 
 import { UserContext } from '../UserContext';
   
 const LoginPage = () => {

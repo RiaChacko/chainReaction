@@ -131,7 +131,7 @@ const PeacefulMode = () => {
 
     useEffect(() => {
         if (gameOver) handleGameOver();
-    }, [gameOver]);   
+    }, [gameOver, handleGameOver]);   
 
     // Result screen
     if (gameOver) {
