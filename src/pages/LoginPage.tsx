@@ -26,7 +26,7 @@ const LoginPage = () => {
                     navigate('/home');
                 }
                 setUsername(username);
-                setUserId(data['player_id']);
+                setUserId(data['id']);
             } catch (error) {
                 console.error('Error:', error);
                 alert('An error occurred. Please try again later.');
@@ -64,7 +64,7 @@ const LoginPage = () => {
                     alert(data.error || 'Sign-up failed');
                 }
                 setUsername(username);
-                setUserId(data['player_id']);
+                setUserId(data['id']);
 
             } catch(error){
                 
