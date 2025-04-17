@@ -41,3 +41,17 @@
 .mode-buttons button:hover {
     transform: scale(1.05);
 }
+
+.scoreboard table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+  
+  .scoreboard th,
+  .scoreboard td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word;
+  }
