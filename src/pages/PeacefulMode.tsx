@@ -20,7 +20,6 @@ const getCurrentDate = () => {
 
 const PeacefulMode = () => {
     const [startTime, setStartTime] = useState<number | null>(null);
-    const [endTime, setEndTime] = useState<number | null>(null);
     const [timer, setTimer] = useState(20);
     const [gameStarted, setGameStarted] = useState(false);
     const [gameOver, setGameOver] = useState(false);
@@ -103,35 +102,31 @@ const PeacefulMode = () => {
         navigate('/home');
     };
 
-    const handleGameOver = async() => {
-        try{
-            const response = await fetch(`./backend/public/game/new.php`,{
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json',
-                },
-                body: JSON.stringify({
-                    game_mode_id :1,
-                    player_id : userId,
-                    start_time : formatToMySQLDatetime(startTime!),
-                    end_time : formatToMySQLDatetime(endTime!),
-                    date : getCurrentDate(),
-                    score : validCount,
-                })
-            });
-            const data = await response.json();
-            console.log(data);                
-
-        } catch(error){
-            
-            console.log(error);
-        }
-        
-    };
-
     useEffect(() => {
-        if (gameOver) handleGameOver();
-    }, [gameOver, handleGameOver]);   
+        if (gameOver) {
+          (async () => {
+            try {
+              const response = await fetch(`./backend/public/game/new.php`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  game_mode_id: 1, // or your actual ID
+                  player_id: userId,
+                  start_time: formatToMySQLDatetime(startTime!),
+                  end_time: formatToMySQLDatetime(Date.now()),
+                  date: getCurrentDate(),
+                  score: validCount,
+                })
+              });
+              const data = await response.json();
+              console.log(data);
+            } catch (err) {
+              console.error(err);
+            }
+          })();
+        }
+      }, [gameOver]);
+      
 
     // Result screen
     if (gameOver) {

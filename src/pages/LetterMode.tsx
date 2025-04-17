@@ -27,7 +27,6 @@ const getCurrentDate = () => {
 
 const LetterMode = () => {
     const [startTime, setStartTime] = useState<number | null>(null);
-    const [endTime, setEndTime] = useState<number | null>(null);
 
     const [selectedLength, setSelectedLength] = useState<number | null>(null);
     const [timer, setTimer] = useState(60);
@@ -50,7 +49,6 @@ const LetterMode = () => {
 
         if (timer === 0) {
             setGameOver(true);
-            setEndTime(Date.now()); 
 
             return;
         }
@@ -116,40 +114,33 @@ const LetterMode = () => {
         navigate('/home');
     };
 
-    const handleGameOver = async() => {
-        console.log(selectedLength);
-        console.log(userId);
-        console.log(formatToMySQLDatetime(startTime!));
-        console.log(formatToMySQLDatetime(endTime!));
-        console.log(getCurrentDate());
-        console.log(validCount);
-        try{
-            const response = await fetch(`./backend/public/game/new.php`,{
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json',
-                },
-                body: JSON.stringify({
-                    game_mode_id :selectedLength! - 1,
-                    player_id : userId,
-                    start_time : formatToMySQLDatetime(startTime!),
-                    end_time : formatToMySQLDatetime(endTime!),
-                    date : getCurrentDate(),
-                    score : validCount,
-                })
-            });
-            const data = await response.json();
-            console.log(data);                
-
-        } catch(error){
-            
-            console.log(error);
-        }
-        
-    };
-
     useEffect(() => {
-        if (gameOver) handleGameOver();
+        if (gameOver) {
+            (async () => {
+                try{
+                    const response = await fetch(`./backend/public/game/new.php`,{
+                        method:'POST',
+                        headers:{
+                            'Content-Type':'application/json',
+                        },
+                        body: JSON.stringify({
+                            game_mode_id :selectedLength! - 1,
+                            player_id : userId,
+                            start_time : formatToMySQLDatetime(startTime!),
+                            end_time : formatToMySQLDatetime(Date.now()),
+                            date : getCurrentDate(),
+                            score : validCount,
+                        })
+                    });
+                    const data = await response.json();
+                    console.log(data);                
+        
+                } catch(error){
+                    
+                    console.log(error);
+                }
+            });
+        };
     }, [gameOver]); 
 
     if (gameOver) {

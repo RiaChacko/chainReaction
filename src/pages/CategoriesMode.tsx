@@ -79,7 +79,6 @@ const getCurrentDate = () => {
 
 const CategoriesMode = () => {
     const [startTime, setStartTime] = useState<number | null>(null);
-    const [endTime, setEndTime] = useState<number | null>(null);
     const [selectedCategory, setSelectedCategory] = useState<keyof typeof CATEGORIES>('Color');
     const [currentWord, setCurrentWord] = useState<string>('');
     const [currentInput, setCurrentInput] = useState<string>('');
@@ -119,7 +118,6 @@ const CategoriesMode = () => {
 
         if (timer === 0) {
             setGameOver(true);
-            setEndTime(Date.now()); 
 
             return
         }
@@ -188,34 +186,30 @@ const CategoriesMode = () => {
         navigate('/home');
     };
 
-    const handleGameOver = async() => {
-        try{
-            const response = await fetch(`./backend/public/game/new.php`,{
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json',
-                },
-                body: JSON.stringify({
-                    game_mode_id :2,
-                    player_id : userId,
-                    start_time : formatToMySQLDatetime(startTime!),
-                    end_time : formatToMySQLDatetime(endTime!),
-                    date : getCurrentDate(),
-                    score : score,
-                })
-            });
-            const data = await response.json();
-            console.log(data);                
-
-        } catch(error){
-            
-            console.log(error);
-        }
-        
-    };
-
     useEffect(() => {
-        if (gameOver) handleGameOver();
+        if (gameOver) (async () => {
+            try{
+                const response = await fetch(`./backend/public/game/new.php`,{
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'application/json',
+                    },
+                    body: JSON.stringify({
+                        game_mode_id :2,
+                        player_id : userId,
+                        start_time : formatToMySQLDatetime(startTime!),
+                        end_time : formatToMySQLDatetime(Date.now()),
+                        date : getCurrentDate(),
+                        score : score,
+                    })
+                });
+                const data = await response.json();
+                console.log(data);                
+    
+            } catch(error){                
+                console.log(error);
+            }
+        })
     }, [gameOver]);   
 
 
