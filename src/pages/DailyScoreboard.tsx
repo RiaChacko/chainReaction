@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const DailyScoreboard = () => {
     const navigate = useNavigate();
     //const entries = loadScoreboard();
-    const [entries, setEntries] = useState([{date:"",score:0}]);
+    const [entries, setEntries] = useState([{daily_scoreboard_id:"",date:"",highest_score:0,player_id:""}]);
     const loadScoreboard = async () => {
         try{
         const response = await fetch("./backend/public/daily_scoreboard/index.php");
@@ -38,7 +38,7 @@ const DailyScoreboard = () => {
             <h1 className="title">Daily Scoreboard</h1>
             <ol>
             {entries&&entries.map((entry)=>(
-                <li key={entry.score}>{entry.date} {entry.score}</li>
+                <li key={entry.daily_scoreboard_id}>{entry.date} {entry.highest_score} {entry.player_id}</li>
             ))}
             </ol>
             
