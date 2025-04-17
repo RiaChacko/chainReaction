@@ -1,4 +1,5 @@
 Hosted on CISE Servers [HERE](https://www.cise.ufl.edu/~menghuahuang/chain_reaction/)
+
 User Manual for Chain Reaction [HERE](https://docs.google.com/document/d/1RDyA3RpPabYsAapVMxHzdzJt9CYzEWufGnc69tHoDW4/edit?usp=sharing)
 # Getting Started with Create React App
 
