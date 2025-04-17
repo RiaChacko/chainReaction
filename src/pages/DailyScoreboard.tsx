@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './DailyScoreboard.css';
 import { useNavigate } from 'react-router-dom';
-// import { ScoreboardEntry } from '../types'; // Adjust the import path as necessary
+import { ScoreboardEntry } from '../types'; // Adjust the import path as necessary
 
 const GameModes = {
     1: "Peaceful",
@@ -16,7 +16,7 @@ const GameModes = {
 const DailyScoreboard = () => {
     const navigate = useNavigate();
     const [gameMode, setGameMode] = useState(1);
-    // const [entries, setEntries] = useState<ScoreboardEntry[]>([]);
+    const [entries, setEntries] = useState<ScoreboardEntry[]>([]);
 
     
     useEffect(() => { 
@@ -25,7 +25,7 @@ const DailyScoreboard = () => {
                 const response = await fetch(`./backend/public/daily_scoreboard/show.php?id=${gameMode}`);
                 const data = await response.json();
                 console.log(data);
-                // setEntries(data);
+                setEntries(data);
             } catch (err) {
                 console.error("Failed to load scoreboard:", err);
             }
@@ -52,7 +52,7 @@ const DailyScoreboard = () => {
                 </button>
             ))}
 
-            {/* <div className="scoreboard">
+            <div className="scoreboard">
                 <table>
                 <thead>
                     <tr>
@@ -73,7 +73,7 @@ const DailyScoreboard = () => {
                     ))}
                 </tbody>
                 </table>
-            </div> */}
+            </div>
         </div>
     );
 };
