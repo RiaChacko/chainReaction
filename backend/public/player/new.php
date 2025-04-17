@@ -12,12 +12,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $data = json_decode(file_get_contents("php://input"), true);
 
   $player = [];
-  $player['average_words_per_minute'] = $data['average_words_per_minute'] ?? 0;
   $player['username'] = $data['username'] ?? '';
   $player['email'] = $data['email'] ?? '';
   $player['password'] = $data['password'] ?? '';
-  $player['highest_score'] = $data['highest_score'] ?? 0;
-  $player['daily_streak'] = $data['daily_streak'] ?? 0;
 
   $id = insert_player($player);
   if (is_array($id)) {
