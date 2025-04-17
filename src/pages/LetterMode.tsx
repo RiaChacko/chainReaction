@@ -3,7 +3,6 @@ import './LetterMode.css';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
-import { valid } from 'semver';
 
 const WORD_LISTS: { [length: number]: string[] } = {
     4: ['star', 'fish', 'tree', 'gate', 'drop', 'book'],
@@ -42,7 +41,7 @@ const LetterMode = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const { userId, username } = useContext(UserContext);
+    const { userId } = useContext(UserContext);
 
 
     // Timer logic
@@ -118,39 +117,38 @@ const LetterMode = () => {
     };
 
     const handleGameOver = async() => {
-        if (gameOver){
-            try{
-                const response = await fetch(`./backend/public/game/new.php`,{
-                    method:'POST',
-                    headers:{
-                        'Content-Type':'application/json',
-                    },
-                    body: JSON.stringify({
-                        game_mode_id :selectedLength,
-                        player_id : userId,
-                        start_time : formatToMySQLDatetime(startTime!),
-                        end_time : formatToMySQLDatetime(endTime!),
-                        date : getCurrentDate(),
-                        word_count : validCount
-                    })
-                });
-                const data = await response.json();
-                console.log(data);                
-                if(response.ok){
-                    navigate('/home');
-                }
-                else{
-                    alert(data.error || 'Sign-up failed');
-                }
-            } catch(error){
-                
-                console.log(error);
+        try{
+            const response = await fetch(`./backend/public/game/new.php`,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify({
+                    game_mode_id :selectedLength,
+                    player_id : userId,
+                    start_time : formatToMySQLDatetime(startTime!),
+                    end_time : formatToMySQLDatetime(endTime!),
+                    date : getCurrentDate(),
+                    word_count : validCount
+                })
+            });
+            const data = await response.json();
+            console.log(data);                
+            if(response.ok){
+                navigate('/home');
             }
+            else{
+                alert(data.error || 'Sign-up failed');
+            }
+        } catch(error){
+            
+            console.log(error);
         }
         
     };
 
     if (gameOver) {
+        handleGameOver();
         return (
             <div className="letter-container">
                 <button onClick={handleBack} className="back-btn">← Back</button>
