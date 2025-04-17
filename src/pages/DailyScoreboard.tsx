@@ -7,7 +7,12 @@ import { useNavigate } from 'react-router-dom';
 const DailyScoreboard = () => {
     const navigate = useNavigate();
     //const entries = loadScoreboard();
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1; // Month is 0-indexed, so add 1
+    const day = currentDate.getDate();
     const [entries, setEntries] = useState([{daily_scoreboard_id:"",date:"",highest_score:0,player_id:""}]);
+    const formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
     const loadScoreboard = async () => {
         try{
         const response = await fetch("./backend/public/daily_scoreboard/index.php");
@@ -16,8 +21,8 @@ const DailyScoreboard = () => {
         setEntries(data);}
                   catch(error){console.error("Error getting scoreboard", error)}
         
-        //setEntries(entries.filter((entry)=>(entry.date==("04-16-2025"))));
-        //setEntries(entries.sort((a,b)=>(a.score-b.score)));
+        setEntries(entries.filter((entry)=>(entry.date==(formattedDate))));
+        setEntries(entries.sort((a,b)=>(a.highest_score-b.highest_score)));
                   
     }
     
