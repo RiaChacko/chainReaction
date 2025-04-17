@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './LetterMode.css';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
+import { valid } from 'semver';
 
 const WORD_LISTS: { [length: number]: string[] } = {
     4: ['star', 'fish', 'tree', 'gate', 'drop', 'book'],
@@ -15,7 +18,18 @@ const getRandomWord = (length: number) => {
     return list[Math.floor(Math.random() * list.length)] || 'train';
 };
 
+const formatToMySQLDatetime = (timestamp: number) => {
+    return new Date(timestamp).toISOString().slice(0, 19).replace('T', ' ');
+};
+
+const getCurrentDate = () => {
+    return new Date().toISOString().split('T')[0];
+};
+
 const LetterMode = () => {
+    const [startTime, setStartTime] = useState<number | null>(null);
+    const [endTime, setEndTime] = useState<number | null>(null);
+
     const [selectedLength, setSelectedLength] = useState<number | null>(null);
     const [timer, setTimer] = useState(60);
     const [gameStarted, setGameStarted] = useState(false);
@@ -28,12 +42,17 @@ const LetterMode = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
+    const { userId, username } = useContext(UserContext);
+
+
     // Timer logic
     useEffect(() => {
         if (!gameStarted || gameOver) return;
 
         if (timer === 0) {
             setGameOver(true);
+            setEndTime(Date.now()); 
+
             return;
         }
 
@@ -89,6 +108,8 @@ const LetterMode = () => {
             const start = getRandomWord(selectedLength);
             setPreviousWords([start]);
             setGameStarted(true);
+
+            setStartTime(Date.now()); // current timestamp in ms
         }
     };
 
@@ -96,41 +117,40 @@ const LetterMode = () => {
         navigate('/home');
     };
 
-    const handleGameOver = () => {
-        // Placeholder logic
-
-        // try{
-        //     const response = await fetch(`./backend/public/game/new.php`{
-        //         method:'POST',
-        //         headers:{
-        //             'Content-Type':'application/json',
-        //         },
-        //         body: JSON.stringify({
-        //             game_mode_id :,
-        //             player_id :,
-        //             start_time :,
-        //             end_time :,
-        //             date :,
-        //             word_count :
-        //     });
-        //     const data = await response.json();
-        //     console.log(data);                
-        //     if(response.ok){
-        //         navigate('/home');
-        //     }
-        //     else{
-        //         alert(data.error || 'Sign-up failed');
-        //     }
-        // } catch(error){
-            
-        //     console.log(error);
-        // }
+    const handleGameOver = async() => {
+        if (gameOver){
+            try{
+                const response = await fetch(`./backend/public/game/new.php`,{
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'application/json',
+                    },
+                    body: JSON.stringify({
+                        game_mode_id :selectedLength,
+                        player_id : userId,
+                        start_time : formatToMySQLDatetime(startTime!),
+                        end_time : formatToMySQLDatetime(endTime!),
+                        date : getCurrentDate(),
+                        word_count : validCount
+                    })
+                });
+                const data = await response.json();
+                console.log(data);                
+                if(response.ok){
+                    navigate('/home');
+                }
+                else{
+                    alert(data.error || 'Sign-up failed');
+                }
+            } catch(error){
+                
+                console.log(error);
+            }
+        }
         
-
     };
 
     if (gameOver) {
-        handleGameOver();
         return (
             <div className="letter-container">
                 <button onClick={handleBack} className="back-btn">← Back</button>
