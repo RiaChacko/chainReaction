@@ -16,7 +16,7 @@ const GameModes = {
 const DailyScoreboard = () => {
     const navigate = useNavigate();
     const [gameMode, setGameMode] = useState(1);
-    const [entries, setEntries] = useState<ScoreboardEntry[]>([]);
+    // const [entries, setEntries] = useState<ScoreboardEntry[]>([]);
 
     
     useEffect(() => { 
@@ -25,8 +25,7 @@ const DailyScoreboard = () => {
                 const response = await fetch(`./backend/public/daily_scoreboard/show.php?id=${gameMode}`);
                 const data = await response.json();
                 console.log(data);
-                setEntries(data);
-                console.log(entries);
+                // setEntries(data);
             } catch (err) {
                 console.error("Failed to load scoreboard:", err);
             }
