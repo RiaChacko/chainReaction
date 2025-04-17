@@ -58,6 +58,7 @@ function find_all_players() {
 
 function insert_player($player) {
   global $db;
+
   $sql = "INSERT INTO Player (avg_words_per_min, playtime, username, email, password, highest_score, daily_streak) VALUES ('" .
          $player['avg_words_per_min'] . "', '" .
          $player['playtime'] . "', '" .
@@ -66,8 +67,16 @@ function insert_player($player) {
          $player['password'] . "', '" .
          $player['highest_score'] . "', '" .
          $player['daily_streak'] . "')";
+
   $result = mysqli_query($db, $sql);
-  return $result ? true : die(mysqli_error($db));
+
+  if (!$result) {
+    // Save error to log or return it
+    error_log("MySQL error: " . mysqli_error($db));
+    return ['error' => mysqli_error($db)];
+  }
+
+  return true;
 }
 
 function find_player_by_id($id) {

@@ -3,6 +3,9 @@
 <?php
 // backend/public/player/new.php
 // get all players
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 header('Content-Type: application/json');
 require_once('../../private/initialize.php');
 
