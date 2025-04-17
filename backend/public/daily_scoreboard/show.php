@@ -13,9 +13,14 @@ if ($id) {
   while ($entry = mysqli_fetch_assoc($result)) {
     $entries[] = $entry;
   }
-  
-  echo json_encode($entries ?: ['error' => 'Game mode not found']);
+
   mysqli_free_result($result);
+
+  if (empty($entries)) {
+    echo json_encode(['error' => 'No entries found']);
+  } else {
+    echo json_encode($entries);
+  }
 } else {
   echo json_encode(['error' => 'ID is required']);
 }
