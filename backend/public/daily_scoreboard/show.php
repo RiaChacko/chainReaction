@@ -1,5 +1,7 @@
 #!/usr/local/bin/php
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 header('Content-Type: application/json');
 require_once('../../private/initialize.php');

@@ -59,13 +59,11 @@ function find_all_players() {
 function insert_player($player) {
   global $db;
 
-  $sql = "INSERT INTO Player (average_words_per_minute, username, email, password, highest_score, daily_streak) VALUES ('" .
-         $player['average_words_per_minute'] . "', '" .
-         $player['username'] . "', '" .
-         $player['email'] . "', '" .
-         $player['password'] . "', '" .
-         $player['highest_score'] . "', '" .
-         $player['daily_streak'] . "')";
+  $sql = "INSERT INTO Player (username, email, password) VALUES ('" .
+          $player['username'] . "', '" .
+          $player['email'] . "', '" .
+          $player['password'] . "')";
+
 
   $result = mysqli_query($db, $sql);
 
@@ -89,13 +87,9 @@ function find_player_by_id($id) {
 function update_player($player) {
     global $db;
     $sql = "UPDATE Player SET ";
-    $sql .= "average_words_per_minute='" . $player['average_words_per_minute'] . "', ";
     $sql .= "username='" . $player['username'] . "', ";
     $sql .= "email='" . $player['email'] . "', ";
     $sql .= "password='" . $player['password'] . "', ";
-    $sql .= "highest_score='" . $player['highest_score'] . "', ";
-    $sql .= "daily_streak='" . $player['daily_streak'] . "' ";
-    $sql .= "WHERE player_id='" . $player['player_id'] . "' LIMIT 1";
 
     $result = mysqli_query($db, $sql);
     return $result ? true : die(mysqli_error($db));
