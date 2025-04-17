@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './DailyScoreboard.css';
 import { useNavigate } from 'react-router-dom';
-import { ScoreboardEntry } from '../types'; // Adjust the import path as necessary
+// import { ScoreboardEntry } from '../types'; // Adjust the import path as necessary
 
 const GameModes = {
     1: "Peaceful",
