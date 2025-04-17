@@ -1,0 +1,43 @@
+.homepage-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #6ec6ff, #002f6c);
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+}
+
+.title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    font-family: Arial, sans-serif;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.mode-buttons button {
+    background: linear-gradient(to bottom, #ffd54f, #c8a415);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.mode-buttons button:hover {
+    transform: scale(1.05);
+}
