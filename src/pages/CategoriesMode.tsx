@@ -187,30 +187,29 @@ const CategoriesMode = () => {
     };
 
     useEffect(() => {
-        if (gameOver) (async () => {
-            try{
-                const response = await fetch(`./backend/public/game/new.php`,{
-                    method:'POST',
-                    headers:{
-                        'Content-Type':'application/json',
-                    },
-                    body: JSON.stringify({
-                        game_mode_id :2,
-                        player_id : userId,
-                        start_time : formatToMySQLDatetime(startTime!),
-                        end_time : formatToMySQLDatetime(Date.now()),
-                        date : getCurrentDate(),
-                        score : score,
-                    })
-                });
-                const data = await response.json();
-                console.log(data);                
-    
-            } catch(error){                
-                console.log(error);
+        if (gameOver) {
+          (async () => {
+            try {
+              const response = await fetch(`./backend/public/game/new.php`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  game_mode_id: 2,
+                  player_id: userId,
+                  start_time: formatToMySQLDatetime(startTime!),
+                  end_time: formatToMySQLDatetime(Date.now()),
+                  date: getCurrentDate(),
+                  score: score,
+                })
+              });
+              const data = await response.json();
+              console.log(data);
+            } catch (err) {
+              console.error(err);
             }
-        })
-    }, [gameOver]);   
+          })();
+        }
+      }, [gameOver]); 
 
 
     if (gameOver) {

@@ -110,7 +110,7 @@ const PeacefulMode = () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                  game_mode_id: 1, // or your actual ID
+                  game_mode_id: 1,
                   player_id: userId,
                   start_time: formatToMySQLDatetime(startTime!),
                   end_time: formatToMySQLDatetime(Date.now()),

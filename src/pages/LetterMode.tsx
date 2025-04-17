@@ -117,31 +117,27 @@ const LetterMode = () => {
     useEffect(() => {
         if (gameOver) {
             (async () => {
-                try{
-                    const response = await fetch(`./backend/public/game/new.php`,{
-                        method:'POST',
-                        headers:{
-                            'Content-Type':'application/json',
-                        },
-                        body: JSON.stringify({
-                            game_mode_id :selectedLength! - 1,
-                            player_id : userId,
-                            start_time : formatToMySQLDatetime(startTime!),
-                            end_time : formatToMySQLDatetime(Date.now()),
-                            date : getCurrentDate(),
-                            score : validCount,
-                        })
-                    });
-                    const data = await response.json();
-                    console.log(data);                
-        
-                } catch(error){
-                    
-                    console.log(error);
+                try {
+                const response = await fetch(`./backend/public/game/new.php`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                    game_mode_id: selectedLength! - 1,
+                    player_id: userId,
+                    start_time: formatToMySQLDatetime(startTime!),
+                    end_time: formatToMySQLDatetime(Date.now()),
+                    date: getCurrentDate(),
+                    score: validCount,
+                    })
+                });
+                const data = await response.json();
+                console.log(data);
+                } catch (err) {
+                console.error(err);
                 }
-            });
-        };
-    }, [gameOver]); 
+          })();
+        }
+      }, [gameOver]);
 
     if (gameOver) {
         return (
