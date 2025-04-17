@@ -129,17 +129,12 @@ const LetterMode = () => {
                     start_time : formatToMySQLDatetime(startTime!),
                     end_time : formatToMySQLDatetime(endTime!),
                     date : getCurrentDate(),
-                    word_count : validCount
+                    word_count : validCount,
                 })
             });
             const data = await response.json();
             console.log(data);                
-            if(response.ok){
-                navigate('/home');
-            }
-            else{
-                alert(data.error || 'Sign-up failed');
-            }
+
         } catch(error){
             
             console.log(error);
