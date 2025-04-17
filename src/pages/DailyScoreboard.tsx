@@ -12,9 +12,9 @@ const DailyScoreboard = () => {
         try{
         const response = await fetch("./backend/public/daily_scoreboard/index.php");
         console.log(response.text());
-        const data = await response.json();}
+        const data = await response.json();
         
-        //setEntries(data);}
+        setEntries(data);}
                   catch(error){console.error("Error getting scoreboard", error)}
         
         //setEntries(entries.filter((entry)=>(entry.date==("04-16-2025"))));
