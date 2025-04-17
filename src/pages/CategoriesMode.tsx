@@ -147,26 +147,28 @@ const CategoriesMode = () => {
             return false;
         }
 
-        if (category === 'Countries') {
-            return true;  
-        }
+        return true;
 
-        if(category === 'Languages'){
-            return true;
-        }
+        // if (category === 'Countries') {
+        //     return true;  
+        // }
 
-        try {
-            const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-            if (response.ok) {
-                return true;
-            } else {
-                setError(`"${word}" is not a valid word in the dictionary.`);
-                return false;
-            }
-        } catch (error) {
-            setError('Error validating the word.');
-            return false;
-        }
+        // if(category === 'Languages'){
+        //     return true;
+        // }
+
+        // try {
+        //     const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+        //     if (response.ok) {
+        //         return true;
+        //     } else {
+        //         setError(`"${word}" is not a valid word in the dictionary.`);
+        //         return false;
+        //     }
+        // } catch (error) {
+        //     setError('Error validating the word.');
+        //     return false;
+        // }
     };
 
     const checkUsed = async(word: string) : Promise<boolean> => {
