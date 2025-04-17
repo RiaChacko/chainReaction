@@ -66,7 +66,7 @@ const LoginPage = () => {
                 }
             } catch(error){
                 
-                alert('An error occurred. Please try again later.');
+                console.log(error);
             }
             
             
