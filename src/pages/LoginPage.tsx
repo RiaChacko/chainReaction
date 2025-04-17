@@ -13,10 +13,13 @@ const LoginPage = () => {
         // Placeholder logic
         if (username && password) {
             try {
-                const response = await fetch(`./backend/public/player/show.php`, {
-                    method: 'GET',
+                const response = await fetch(`./backend/public/player/signin.php`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, username, password }),
                 });
                 const data = await response.json();
+                console.log(data);
                 const player = data.find((player: { username: string; }) => player.username === username);
     
                 if (player && await verifyPassword(password, player.password)) {
