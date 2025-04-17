@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 import { Game } from '../types'; 
-
+import { UserContext } from '../UserContext';
+  
 const LoginPage = () => {
-    const [username, setUsername] = useState('');
+    const [username, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState(''); 
     const navigate = useNavigate();
+    const { setUserId, setUsername } = useContext(UserContext);
 
     const handleSignIn = async () => {
         // Placeholder logic
@@ -59,6 +61,9 @@ const LoginPage = () => {
                 else{
                     alert(data.error || 'Sign-up failed');
                 }
+                setUsername(username);
+                setUserId(data.id);
+
             } catch(error){
                 
                 console.log(error);
@@ -112,7 +117,7 @@ const LoginPage = () => {
                     placeholder="Username"
                     className="login-input"
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => setUser(e.target.value)}
                 />
                 <input
                     type="password"
