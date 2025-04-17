@@ -83,14 +83,14 @@ const CategoriesMode = () => {
     const [currentWord, setCurrentWord] = useState<string>('');
     const [currentInput, setCurrentInput] = useState<string>('');
     const [score, setScore] = useState<number>(0);
-    const [timer, setTimer] = useState<number>(20);
+    const [timer, setTimer] = useState<number>(30);
     const [gameStarted, setGameStarted] = useState<boolean>(false);
     const [gameOver, setGameOver] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const navigate = useNavigate();
 
     const { userId } = useContext(UserContext);
-    const wordsUsed = useRef(new Set());
+    const [previousWords, setPreviousWords] = useState<string[]>([]);
 
 
     useEffect(() => {
@@ -133,6 +133,7 @@ const CategoriesMode = () => {
 
         const word = getRandomWord(randomCategory); 
         setCurrentWord(word);
+        setPreviousWords([word]);
         setGameStarted(true);
         setStartTime(Date.now()); // current timestamp in ms
     };
@@ -171,33 +172,33 @@ const CategoriesMode = () => {
         // }
     };
 
-    const checkUsed = async(word: string) : Promise<boolean> => {
-        if (wordsUsed.current.has(word)) {
-            return true;
-        } 
 
-        wordsUsed.current.add(word);
-        return false;
-
-    }
 
     const handleSubmit = async () => {
         const newWord = currentInput.trim().toLowerCase();
-        const wordUsed = await checkUsed(newWord);
-        if (wordUsed) {
+        if (previousWords.includes(newWord)) {
             setError(`User has already used the word "${newWord}"`);
         }
 
         else{
-            const isValid = await validateWord(newWord, selectedCategory);
-            
-            if (isValid) {
-                setScore((prev) => prev + 1);
-                setError('');
-                const nextWord = getRandomWord(selectedCategory); 
-                setCurrentWord(nextWord);
-            } else {
-                setError(`"${newWord}" is not a valid word for ${selectedCategory}`);
+                
+            const lastChar = currentWord.charAt(currentWord.length - 1).toLowerCase();
+
+            if (!newWord.startsWith(lastChar)) {
+                setError(`Word must start with "${lastChar}"`);
+            }
+
+            else {
+                const isValid = await validateWord(newWord, selectedCategory);
+                
+                if (isValid) {
+                    setScore((prev) => prev + 1);
+                    setError('');
+                    setPreviousWords([newWord, ...previousWords]);
+                    setCurrentWord(newWord);
+                } else {
+                    setError(`"${newWord}" is not a valid word for ${selectedCategory}`);
+                }
             }
         }
 
@@ -265,10 +266,15 @@ const CategoriesMode = () => {
                     Category: {selectedCategory}
                 </div>
                 <div className="timer">:{timer}</div>
+
             </div>
 
-            <div className="current-word">
-                <h3>Current Word: {currentWord}</h3>
+            <div className="previous-words">
+                    {previousWords.slice(0, 2).map((word, i) => (
+                        <div key={i} className={i === 0 ? 'word white' : 'word gray'}>
+                            {word}
+                        </div>
+                    ))}
             </div>
 
             <input
