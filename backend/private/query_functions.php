@@ -59,18 +59,18 @@ function find_all_players() {
 function insert_player($player) {
   global $db;
 
-  $sql = "INSERT INTO Player (username, email, password) VALUES ('" .
-          $player['username'] . "', '" .
-          $player['email'] . "', '" .
-          $player['password'] . "')";
+  $username = mysqli_real_escape_string($db, $player['username']);
+  $email = mysqli_real_escape_string($db, $player['email']);
+  $password = mysqli_real_escape_string($db, $player['password']);
 
+  $sql = "INSERT INTO Player (username, email, password)
+          VALUES ('$username', '$email', '$password')";
 
   $result = mysqli_query($db, $sql);
 
   if (!$result) {
-    // Save error to log or return it
     error_log("MySQL error: " . mysqli_error($db));
-    return ['error' => mysqli_error($db)];
+    return ['error' => 'Insert failed', 'details' => mysqli_error($db)];
   }
 
   return mysqli_insert_id($db);
