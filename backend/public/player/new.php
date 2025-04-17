@@ -13,7 +13,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $player = [];
   $player['average_words_per_minute'] = $data['average_words_per_minute'] ?? 0;
-  $player['playtime'] = $data['playtime'] ?? 0;
   $player['username'] = $data['username'] ?? '';
   $player['email'] = $data['email'] ?? '';
   $player['password'] = $data['password'] ?? '';
