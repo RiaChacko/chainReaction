@@ -12,8 +12,7 @@ export type Game = {
   game_mode_id: number;
   start_time: string; // ISO datetime string
   end_time: string;   // ISO datetime string
-  score: number; // redundant use word_count instead
-  word_count: number; 
+  score: number; 
   date: string; // YYYY-MM-DD
 };
 

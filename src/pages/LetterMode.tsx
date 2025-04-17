@@ -135,7 +135,7 @@ const LetterMode = () => {
                     start_time : formatToMySQLDatetime(startTime!),
                     end_time : formatToMySQLDatetime(endTime!),
                     date : getCurrentDate(),
-                    word_count : validCount,
+                    score : validCount,
                 })
             });
             const data = await response.json();

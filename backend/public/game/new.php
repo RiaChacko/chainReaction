@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $game['start_time'] = $data['start_time'] ?? '';
   $game['end_time'] = $data['end_time'] ?? '';
   $game['date'] = $data['date'] ?? '';
-  $game['score'] = $data['word_count'] ?? 0;
+  $game['score'] = $data['score'] ?? 0;
 
   $result = insert_game($game);
   echo $result ? json_encode(['message' => 'Game inserted']) : json_encode(['error' => 'Insert failed']);

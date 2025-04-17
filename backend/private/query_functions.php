@@ -114,13 +114,13 @@ function player_signin($email, $username, $password) {
 
 function insert_game($game) {
   global $db;
-  $sql = "INSERT INTO Game (game_mode_id, player_id, start_time, end_time, date, word_count) VALUES ('" .
+  $sql = "INSERT INTO Game (game_mode_id, player_id, start_time, end_time, date, score) VALUES ('" .
          $game['game_mode_id'] . "', '" .
          $game['player_id'] . "', '" .
          $game['start_time'] . "', '" .
          $game['end_time'] . "', '" .
          $game['date'] . "', '" .
-         $game['word_count'] . "')";
+         $game['score'] . "')";
   $result = mysqli_query($db, $sql);
   return $result ? true : die(mysqli_error($db));
 }
@@ -149,7 +149,7 @@ function update_game($game) {
     $sql .= "start_time='" . $game['start_time'] . "', ";
     $sql .= "end_time='" . $game['end_time'] . "', ";
     $sql .= "date='" . $game['date'] . "', ";
-    $sql .= "word_count='" . $game['word_count'] . "' ";
+    $sql .= "score='" . $game['score'] . "' ";
     $sql .= "WHERE game_id='" . $game['game_id'] . "' LIMIT 1";
 
     $result = mysqli_query($db, $sql);
@@ -168,12 +168,12 @@ function delete_game($id) {
 function find_daily_high_score($game_mode_id) {
   global $db;
 
-  $sql = "SELECT p.username, g.word_count, g.date
+  $sql = "SELECT p.username, g.score, g.date
           FROM Game g
           JOIN Player p ON g.player_id = p.player_id
           WHERE g.date = CURDATE()
             AND g.game_mode_id = '" . $game_mode_id . "'
-          ORDER BY g.word_count DESC";
+          ORDER BY g.score DESC";
 
   $result = mysqli_query($db, $sql);
   confirm_result_set($result);

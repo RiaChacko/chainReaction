@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $game['start_time'] = $data['start_time'] ?? '';
   $game['end_time'] = $data['end_time'] ?? '';
   $game['date'] = $data['date'] ?? '';
-  $game['word_count'] = $data['word_count'] ?? 0;
+  $game['score'] = $data['score'] ?? 0;
 
   $result = update_game($game);
   echo $result ? json_encode(['message' => 'Game updated']) : json_encode(['error' => 'Update failed']);
