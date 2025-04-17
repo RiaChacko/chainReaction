@@ -32,7 +32,7 @@ const DailyScoreboard = () => {
 
         fetchData(); 
     }, [gameMode]);
-    
+
     const handleBack = () => {
         navigate('/home');
     };
@@ -51,7 +51,7 @@ const DailyScoreboard = () => {
                 </button>
             ))}
 
-            <div className="scoreboard">
+            {/* <div className="scoreboard">
                 <table>
                 <thead>
                     <tr>
@@ -72,7 +72,7 @@ const DailyScoreboard = () => {
                     ))}
                 </tbody>
                 </table>
-            </div>
+            </div> */}
         </div>
     );
 };
