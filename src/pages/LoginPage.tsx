@@ -76,9 +76,7 @@ const LoginPage = () => {
         }
     };
 
-    const handleGuest = () => {
-        navigate('/home');
-    };
+    
 
     return (
         <div className="login-container">
@@ -109,7 +107,7 @@ const LoginPage = () => {
                 <div className="login-buttons">
                     <button onClick={handleSignIn} className="login-btn">Sign In</button>
                     <button onClick={handleSignUp} className="login-btn">Sign Up</button>
-                    <button onClick={handleGuest} className="login-btn guest">Play as Guest</button>
+                    
                 </div>
             </div>
         </div>
