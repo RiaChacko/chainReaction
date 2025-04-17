@@ -12,7 +12,7 @@ const DailyScoreboard = () => {
     //const month = currentDate.getMonth() + 1; // Month is 0-indexed, so add 1
     //const day = currentDate.getDate();
     const [entries, setEntries] = useState([{daily_scoreboard_id:"",date:"",highest_score:0,player_id:""}]);
-    const formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+    //const formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
     const loadScoreboard = async () => {
         try{
         const response = await fetch("./backend/public/daily_scoreboard/index.php");
