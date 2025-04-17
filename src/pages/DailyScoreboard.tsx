@@ -24,7 +24,6 @@ const DailyScoreboard = () => {
             try {
                 const response = await fetch(`./backend/public/daily_scoreboard/show.php?id=${gameMode}`);
                 const data = await response.json();
-                console.log(data);
                 setEntries(data);
             } catch (err) {
                 console.error("Failed to load scoreboard:", err);

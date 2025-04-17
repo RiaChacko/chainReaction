@@ -12,7 +12,6 @@ const LoginPage = () => {
     const { setUserId, setUsername } = useContext(UserContext);
 
     const handleSignIn = async () => {
-        // Placeholder logic
         if (username && password) {
             try {
                 const response = await fetch(`./backend/public/player/signin.php`, {
