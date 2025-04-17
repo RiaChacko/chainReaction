@@ -65,7 +65,7 @@ const DailyScoreboard = () => {
                 <tbody>
                     {entries.length === 0 ? (
                         <tr>
-                        <td colSpan={4}>No scores for this mode today.</td>
+                        <td colSpan={4}>No games today.</td>
                         </tr>
                     ) : (
                         entries.map((item, index) => (
