@@ -173,6 +173,21 @@ function delete_game($id) {
 
 // ----- Daily Scoreboard -----
 
+function find_daily_high_score($game_mode_id) {
+  global $db;
+
+  $sql = "SELECT p.username, g.score, g.date
+          FROM Game g
+          JOIN Player p ON g.player_id = p.player_id
+          WHERE g.date = CURDATE()
+            AND g.game_mode_id = '" . $game_mode_id . "'
+          ORDER BY g.score DESC";
+
+  $result = mysqli_query($db, $sql);
+  confirm_result_set($result);
+  return $result;
+}
+
 function insert_daily_scoreboard($ds) {
   global $db;
   $sql = "INSERT INTO DailyScoreboard (date, highest_score, player_id, game_mode_id) VALUES ('" .

@@ -1,53 +1,74 @@
 import React, { useState, useEffect } from 'react';
 import './DailyScoreboard.css';
 import { useNavigate } from 'react-router-dom';
+import { ScoreboardEntry } from '../types'; // Adjust the import path as necessary
 
-
+const GameModes = {
+    1: "Peaceful",
+    2: "Normal",
+    4: "4 Letter",
+    5: "5 Letter",
+    6: "6 Letter",
+    7: "7 Letter",
+    8: "8 Letter",
+  };
 
 const DailyScoreboard = () => {
     const navigate = useNavigate();
-    //const entries = loadScoreboard();
-    //const currentDate = new Date();
-    //const year = currentDate.getFullYear();
-    //const month = currentDate.getMonth() + 1; // Month is 0-indexed, so add 1
-    //const day = currentDate.getDate();
-    const [entries, setEntries] = useState([{daily_scoreboard_id:"",date:"",highest_score:0,player_id:""}]);
-    //const formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+    const [gameMode, setGameMode] = useState(1);
+    const [entries, setEntries] = useState<ScoreboardEntry[]>([]);
+
     const loadScoreboard = async () => {
-        try{
-        const response = await fetch("./backend/public/daily_scoreboard/show.php?id=#"); // change # with whatever the game_mode id is
-        const data = await response.json();
-        
-        setEntries(data);}
-                  catch(error){console.error("Error getting scoreboard", error)}
-        
-        //setEntries(entries.filter((entry)=>(entry.date===(formattedDate))));
-        //setEntries(entries.sort((a,b)=>(a.highest_score-b.highest_score)));
-                  
-    }
+        try {
+            const response = await fetch(`./backend/public/daily_scoreboard/show.php?id=${gameMode}`);
+            const data = await response.json();
+            setEntries(data);
+        } catch (err) {
+            console.error("Failed to load scoreboard:", err);
+        }
+    };
     
-    useEffect(()=>{
-        loadScoreboard();
-        
-    //setEntries(todayEntries);
-    },[]);
+    useEffect(() => { loadScoreboard(); }, [gameMode]);
     const handleBack = () => {
         navigate('/home');
     };
-    
-        
 
     return (
         <div className="letter-container">
             <button onClick={handleBack} className="back-btn">← Back</button>
             <h1 className="title">Daily Scoreboard</h1>
-            <ol>
-            {entries&&entries.map((entry)=>(
-                <li key={entry.daily_scoreboard_id}>{entry.date} {entry.highest_score} {entry.player_id}</li>
+            {Object.entries(GameModes).map(([modeId, modeName]) => (
+                <button
+                    key={modeId}
+                    onClick={() => setGameMode(Number(modeId))}
+                    style={{ fontWeight: gameMode === Number(modeId) ? 'bold' : 'normal' }}
+                >
+                    {modeName}
+                </button>
             ))}
-            </ol>
-            
 
+            <div className="scoreboard">
+                <table>
+                <thead>
+                    <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Score</th>
+                    <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {entries.map((item, index) => (
+                    <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{item.username}</td>
+                        <td>{item.score}</td>
+                        <td>{item.date}</td>
+                    </tr>
+                    ))}
+                </tbody>
+                </table>
+            </div>
         </div>
     );
 };
